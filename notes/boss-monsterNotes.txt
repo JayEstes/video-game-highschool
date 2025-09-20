@@ -1,0 +1,11 @@
+joe 
+
+catmin
+ * monster 
+	1. robot like 
+	2. more prone to doudging
+	3. health large 
+ * boss info 
+	1. uses wrenches to attack
+	2. uses 
+jack 
