@@ -75,6 +75,9 @@ MonoBehaviour:
   movementSpeed: 50
   accelerationDampening: 10
   motionDampening: 10
+  raycaster: {fileID: 3908605731287985580}
+  throwTransform: {fileID: 2946537122215888132}
+  head: {fileID: 45697638194755103}
 --- !u!114 &8400627495359909842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,6 +93,37 @@ MonoBehaviour:
   head: {fileID: 45697638194755103}
   body: {fileID: 7698848974472032099}
   mouseSensitivity: 10
+--- !u!1 &2813627535141343440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2946537122215888132}
+  m_Layer: 0
+  m_Name: Throw Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2946537122215888132
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2813627535141343440}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 45697638194755103}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3494483352801041876
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,6 +135,7 @@ GameObject:
   - component: {fileID: 45697638194755103}
   - component: {fileID: 4910417094747680121}
   - component: {fileID: 6129064962513967212}
+  - component: {fileID: 3908605731287985580}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: Untagged
@@ -120,7 +155,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2946537122215888132}
   m_Father: {fileID: 7698848974472032099}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &4910417094747680121
@@ -182,3 +218,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3494483352801041876}
   m_Enabled: 1
+--- !u!114 &3908605731287985580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3494483352801041876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4194b2e8253b7b43a533246c03244cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 5
+  layers:
+    serializedVersion: 2
+    m_Bits: 1

@@ -29,13 +29,22 @@
                     "id": "2eb081e4-43b1-42fc-96b5-e9aaa7be9035",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Hold",
-                    "initialStateCheck": false
+                    "interactions": "Press",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Jump",
                     "type": "Button",
                     "id": "9149b589-1cec-4480-91e3-885bb5e0c318",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Throw",
+                    "type": "Button",
+                    "id": "b37520e9-2d80-476c-b4e5-fe99996361d2",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -244,7 +253,7 @@
                 {
                     "name": "",
                     "id": "ba9da0f1-384c-4813-a688-f7df878e17c8",
-                    "path": "<Keyboard>/e",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -260,6 +269,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f551db81-3870-43db-ac77-44a772041441",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Throw",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
