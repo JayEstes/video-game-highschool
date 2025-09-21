@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,7 +20,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform throwTransform;
 
     private Vector3 motion = new Vector3();
-    private Vector3 acceleration = new Vector3();
+    private Vector3 xzAcceleration = new Vector3();
+    private float yAcceleration = 0.0f;
+
     private float gravity = 0.0f;
     // Maximum fall speed
     private float terminalGravity = -20.0f;
@@ -28,7 +31,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Transform head;
     private ThrowableObject heldThrowable = null;
-    
+
     public float fallSpeed = -3.0f;
 
 
@@ -71,13 +74,16 @@ public class PlayerController : MonoBehaviour
         controls.Player.Enable();
         controls.Player.Interact.started += OnInteractPerformed;
         controls.Player.Interact.canceled += OnInteractCanceled;
-        controls.Player.Throw.started += (InputAction.CallbackContext ctx) => ThrowObject(10.0f);
+        controls.Player.Jump.performed += OnJumpPerformed;
+        controls.Player.Throw.started += OnThrowStarted;
     }
 
     private void OnDisable()
     {
         controls.Player.Interact.performed -= OnInteractPerformed;
         controls.Player.Interact.canceled -= OnInteractCanceled;
+        controls.Player.Jump.performed -= OnJumpPerformed;
+        controls.Player.Throw.started -= OnThrowStarted;
         controls.Player.Disable();
     }
 
@@ -86,8 +92,27 @@ public class PlayerController : MonoBehaviour
         var movementVector2D = controls.Player.Move.ReadValue<Vector2>();
         var movementVector3D = new Vector3(movementVector2D.x, 0.0f, movementVector2D.y);
         movementVector3D *= movementSpeed;
-        acceleration += movementVector3D * Time.deltaTime;
+        xzAcceleration += movementVector3D * Time.deltaTime;
     }
+
+    private void OnThrowStarted(InputAction.CallbackContext ctx)
+    {
+        ThrowObject(10.0f);
+    }
+
+
+    private void OnJumpPerformed(InputAction.CallbackContext ctx)
+    {
+        Jump();
+    }
+
+    private void Jump()
+    {
+        if (!isOnGround) return;
+
+        yAcceleration = 5.0f;
+    }
+
 
     private void OnInteractPerformed(InputAction.CallbackContext ctx)
     {
@@ -121,7 +146,7 @@ public class PlayerController : MonoBehaviour
 
         var go = raycaster.IntersectedGameObject;
         var throwableObject = go.GetComponent<ThrowableObject>();
-        
+
         if (throwableObject == null)
         {
             return;
@@ -144,13 +169,15 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyMotion()
     {
-        motion += acceleration * Time.deltaTime;
+        yAcceleration += gravity * Time.deltaTime;
+        motion += xzAcceleration * Time.deltaTime;
+        motion.y += yAcceleration * Time.deltaTime;
 
         // Dampening
-        acceleration = Vector3.Lerp(acceleration, Vector3.zero, accelerationDampening * Time.deltaTime);
+        xzAcceleration = Vector3.Lerp(xzAcceleration, Vector3.zero, accelerationDampening * Time.deltaTime);
 
         characterController.Move(transform.TransformDirection(motion));
-        
+
         // Dampening
         motion = Vector3.Lerp(motion, Vector3.zero, motionDampening * Time.deltaTime);
     }
@@ -165,11 +192,13 @@ public class PlayerController : MonoBehaviour
         }
 
         CollisionFlags flags = characterController.Move(new Vector3(0.0f, gravity, 0.0f));
-        
+
         if (flags.HasFlag(CollisionFlags.Below))
         {
             isOnGround = true;
             gravity = -(1e-5f);
+            yAcceleration = 0.0f;
+            motion.y = 0.0f;
         }
     }
 }

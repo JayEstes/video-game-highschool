@@ -100,8 +100,9 @@ InitTestScene*.unity*
 
 
 # Annoying artifacts
-[Ll]ibrary/
-[Ll]ogs/
-[Oo]bj/
-UserSettings/
-.vscode/
+Library/
+VGH/Library/AssetDB
+/VGH
+VGH/Library/ArtifactDB
+/VGH/Library/Bee
+/VGH/Library

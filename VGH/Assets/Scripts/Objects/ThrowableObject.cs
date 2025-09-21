@@ -6,7 +6,7 @@ public class ThrowableObject : MonoBehaviour
     private Rigidbody rigid = null;
     private Transform moveTo;
     private static float FollowForce = 500.0f;
-    private static float MaxVelocity = 20.0f;
+    private static float MaxVelocity = 60.0f;
 
     private void Start()
     {
@@ -17,7 +17,7 @@ public class ThrowableObject : MonoBehaviour
     {
         if (!moveTo) return;
 
-        var followDampening = 15.0f;
+        var followDampening = 8.0f;
 
         Vector3 dir = (moveTo.position - rigid.position);
         Vector3 force = dir * FollowForce * Time.fixedDeltaTime;
