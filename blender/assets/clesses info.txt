@@ -1,0 +1,34 @@
+Classes
+	- Math
+	- Science 
+	- Art
+	- Gym
+	- Librery
+	- English
+
+Puzzle rooms
+Math: 
+	Room 1: Math room one will consist of puzzle that you have to spin the cornors of the rooms to make the total equal to the floor number. The number of floors can vary or we can decide that later. 
+	Room 2:
+	Room 3:
+Science:
+	Room 1:
+	Room 2:
+	Room 3:
+English:
+	Room 1:
+	Room 2:
+	Room 3:
+
+Time survival room 
+art:
+	Room 1:
+	Room 2:
+	Room 3:
+Librery:
+	Room 1:
+	Room 2:
+	Room 3:
+
+boss room
+gym 
